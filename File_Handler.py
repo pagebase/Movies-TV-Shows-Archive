@@ -1,13 +1,28 @@
-filename = "Movies.md"
-search_data = input("Enter movie name: ").lower()
+def movie_exists(filename, movie_name):
+    
+    with open(filename, "r", encoding="utf-8") as f:
+        lines = [line.lower() for line in f.readlines()]
+    
+    for line in lines:
+        if movie_name in line:
+            return True
+    return False
 
-# Read existing lines
-with open(filename, "a+") as f:
-    f.seek(0)  # move to start to read
-    lines = [line.lower() for line in f.read().splitlines()]  # read all lines without newline chars
+def add_new_movie(filename, movie_name, movie_trailer):
+    with open("Counter.txt","a+") as sr_file:
+        line=sr_file.readlines()
+        for i in line:
+            print(i)
+    with open(filename, "a+") as f:
+        f.write(f"\n[{movie_name}]({movie_trailer})\n")
+        f.close()
+# Example usage
+filename = r"Movies.md"
+search_movie = input("Enter movie name: ").strip().lower()
 
-    if search_data in lines:
-        print(f"{search_data} already exists!")
-    else:
-        f.write(search_data + "\n")
-        print(f"{search_data} added successfully!")
+if movie_exists(filename, search_movie):
+    print(f"✅ '{search_movie}' exists in {filename}")
+else:
+    # print(f"❌ '{search_movie}' not found in {filename}")
+    movie_trailer=input("Enter movie trailer: ").strip()
+    add_new_movie(filename, search_movie, movie_trailer)
