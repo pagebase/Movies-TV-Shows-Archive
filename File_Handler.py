@@ -23,6 +23,5 @@ search_movie = input("Enter movie name: ").strip().lower()
 if movie_exists(filename, search_movie):
     print(f"✅ '{search_movie}' exists in {filename}")
 else:
-    # print(f"❌ '{search_movie}' not found in {filename}")
     movie_trailer=input("Enter movie trailer: ").strip()
     add_new_movie(filename, search_movie, movie_trailer)
